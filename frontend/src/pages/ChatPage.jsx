@@ -17,9 +17,8 @@ import ChatMessage from "../components/ChatMessage";
 import ChatComposer from "../components/ChatComposer";
 import ShareModal from "../components/ShareModal";
 import LoadingState from "../components/LoadingState";
-import { getToken, clearSession } from "../services/api";
+import { getToken, clearSession, API_URL } from "../services/api";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 const CHAT_LIMIT = 10;
 
 /* ======================================================
@@ -1231,11 +1230,6 @@ export default function ChatPage() {
       if (data?.session_id) {
         localStorage.setItem("a2z-nexus-backend-session-id", data.session_id);
       }
-
-      console.log(
-        "A2Z NEXUS RESPONSE:",
-        data
-      );
 
       /* =================================================
          ASSISTANT MESSAGE

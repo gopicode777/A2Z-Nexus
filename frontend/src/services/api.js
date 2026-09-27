@@ -152,6 +152,9 @@ export const remindersApi = {
   create: (data) => api.post("/reminders", data),
 };
 
+// ─── Analytics ───────────────────────────────────────────────────────────
+export const analyticsApi = { get: () => api.get("/analytics") };
+
 // ─── Notifications ───────────────────────────────────────────────────────
 export const notificationsApi = {
   list: (unreadOnly = false) => api.get(`/notifications${unreadOnly ? "?unread_only=true" : ""}`),

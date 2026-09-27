@@ -196,10 +196,6 @@ export default function ChatComposer({
       event.target.files || []
     );
 
-    console.log(
-      "FILE SELECTED:",
-      selected
-    );
 
     if (!selected.length) {
       return;
@@ -230,32 +226,11 @@ export default function ChatComposer({
   ====================================================== */
 
   function sendMessage() {
-    console.log(
-      "========================"
-    );
 
-    console.log(
-      "A2Z SEND BUTTON CLICKED"
-    );
 
-    console.log(
-      "TEXT:",
-      text
-    );
 
-    console.log(
-      "FILES:",
-      files
-    );
 
-    console.log(
-      "DISABLED:",
-      disabled
-    );
 
-    console.log(
-      "========================"
-    );
 
     const cleanText = text
       .replace(
@@ -293,9 +268,6 @@ export default function ChatComposer({
       !finalText &&
       files.length === 0
     ) {
-      console.log(
-        "NOTHING TO SEND"
-      );
 
       return;
     }
@@ -311,10 +283,6 @@ export default function ChatComposer({
       files: [...files],
     };
 
-    console.log(
-      "SENDING PAYLOAD:",
-      payload
-    );
 
     if (
       typeof onSend !== "function"

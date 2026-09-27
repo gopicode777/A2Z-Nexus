@@ -309,7 +309,6 @@ export default function Sidebar({
               gap-3
               shrink-0
               translate-y-[8px]
-              -ml-24
               transition-all
               duration-300
             "
