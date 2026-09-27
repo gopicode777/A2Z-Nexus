@@ -14,6 +14,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
   LogOut,
+  X,
 } from "lucide-react";
 
 import A2ZNexusLogo from "./A2ZNexusLogo";
@@ -104,6 +105,26 @@ export default function Sidebar({
 
   const [pendingDelete, setPendingDelete] = useState(null);
   const [historyOpen, setHistoryOpen] = useState(true);
+
+  // The "Upgrade to Pro" card is dismissible so it never crowds out the
+  // chat history list — once closed, it stays hidden for this browser.
+  const UPGRADE_DISMISSED_KEY = "a2z-nexus-upgrade-dismissed";
+  const [upgradeDismissed, setUpgradeDismissed] = useState(() => {
+    try {
+      return localStorage.getItem(UPGRADE_DISMISSED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+
+  function dismissUpgradeCard() {
+    setUpgradeDismissed(true);
+    try {
+      localStorage.setItem(UPGRADE_DISMISSED_KEY, "1");
+    } catch {
+      // ignore write failures
+    }
+  }
 
   // =====================================================
   // SESSION
@@ -287,7 +308,6 @@ export default function Sidebar({
             relative
             flex
             items-center
-            h-[145px]
             shrink-0
             border-b
             border-[#e5e8f3]
@@ -297,8 +317,8 @@ export default function Sidebar({
 
             ${
               sidebarOpen
-                ? "px-4 justify-center"
-                : "px-2 justify-center"
+                ? "h-[92px] px-4 justify-center"
+                : "h-[76px] px-2 justify-center"
             }
           `}
         >
@@ -313,7 +333,6 @@ export default function Sidebar({
               justify-center
               gap-3
               shrink-0
-              translate-y-[8px]
               transition-all
               duration-300
             "
@@ -421,33 +440,28 @@ export default function Sidebar({
             className={`
               group
               absolute
-              top-1/2
-              -translate-y-1/2
               z-[60]
 
               flex
               items-center
               justify-center
 
-              w-[30px]
-              h-[54px]
+              w-[26px]
+              h-[26px]
 
-              rounded-r-[16px]
-              rounded-l-[10px]
+              rounded-full
 
-              bg-white/95
-              dark:bg-[#181a33]/95
-              backdrop-blur-md
+              bg-white
+              dark:bg-[#181a33]
 
               border
-              border-l-0
               border-[#dfe4f2]
               dark:border-[#2a2e52]
 
               text-[#6874a8]
               dark:text-[#9aa3c7]
 
-              shadow-[4px_6px_18px_rgba(79,70,229,0.12)]
+              shadow-[0_2px_10px_rgba(79,70,229,0.18)]
 
               transition-all
               duration-300
@@ -459,22 +473,24 @@ export default function Sidebar({
               dark:hover:text-[#a5b4fc]
               hover:border-[#c9cff5]
               dark:hover:border-[#3a3f6e]
-              hover:shadow-[5px_8px_22px_rgba(79,70,229,0.20)]
-              hover:w-[34px]
+              hover:shadow-[0_3px_14px_rgba(79,70,229,0.28)]
+              hover:scale-110
 
               active:scale-95
 
+              top-[10px]
+
               ${
                 sidebarOpen
-                  ? "-right-[1px]"
-                  : "right-[-1px]"
+                  ? "right-[10px]"
+                  : "right-[-13px]"
               }
             `}
           >
             {sidebarOpen ? (
               <ChevronsLeft
-                size={18}
-                strokeWidth={2.2}
+                size={14}
+                strokeWidth={2.4}
                 className="
                   transition-all
                   duration-300
@@ -483,8 +499,8 @@ export default function Sidebar({
               />
             ) : (
               <ChevronsRight
-                size={18}
-                strokeWidth={2.2}
+                size={14}
+                strokeWidth={2.4}
                 className="
                   transition-all
                   duration-300
@@ -656,78 +672,92 @@ export default function Sidebar({
             />
 
             {/* =================================================
-                CHAT HISTORY HEADER
+                SCROLLABLE REGION
+                Chat History header + list + Upgrade card all
+                scroll together here. This guarantees the chat
+                list is never squeezed to nothing by fixed elements
+                above/below it — Settings/Logout stay pinned below,
+                but everything in between scrolls as one unit so the
+                Upgrade card can never sit fixed "on top of" history.
             ================================================= */}
 
-            <div className="px-4 shrink-0">
-              <button
-                type="button"
-                onClick={() =>
-                  setHistoryOpen(
-                    (value) => !value
-                  )
-                }
-                className="
-                  w-full
-                  flex
-                  items-center
-                  justify-between
-                  py-2
-                  text-left
-                  text-[#172554]
-                  dark:text-[#c7cbe8]
-                "
-              >
-                <span
+            <div
+              className="
+                flex-1
+                min-h-0
+                overflow-y-auto
+                scrollbar-thin
+              "
+            >
+              {/* =================================================
+                  CHAT HISTORY HEADER
+              ================================================= */}
+
+              <div className="px-4">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setHistoryOpen(
+                      (value) => !value
+                    )
+                  }
                   className="
+                    w-full
                     flex
                     items-center
-                    gap-3
+                    justify-between
+                    py-2
+                    text-left
+                    text-[#172554]
+                    dark:text-[#c7cbe8]
                   "
                 >
-                  <History size={19} />
-
                   <span
                     className="
-                      text-[14px]
-                      font-semibold
+                      flex
+                      items-center
+                      gap-3
                     "
                   >
-                    Chat History
+                    <History size={19} />
+
+                    <span
+                      className="
+                        text-[14px]
+                        font-semibold
+                      "
+                    >
+                      Chat History
+                    </span>
                   </span>
-                </span>
 
-                <ChevronDown
-                  size={16}
-                  className={`
-                    transition-transform
+                  <ChevronDown
+                    size={16}
+                    className={`
+                      transition-transform
 
-                    ${
-                      historyOpen
-                        ? "rotate-0"
-                        : "-rotate-90"
-                    }
-                  `}
-                />
-              </button>
-            </div>
+                      ${
+                        historyOpen
+                          ? "rotate-0"
+                          : "-rotate-90"
+                      }
+                    `}
+                  />
+                </button>
+              </div>
 
-            {/* =================================================
-                CHAT HISTORY
-            ================================================= */}
+              {/* =================================================
+                  CHAT HISTORY
+              ================================================= */}
 
-            {historyOpen && (
-              <div
-                className="
-                  flex-1
-                  min-h-0
-                  overflow-y-auto
-                  px-4
-                  pt-1
-                  pb-3
-                  scrollbar-thin
-                "
-              >
+              {historyOpen && (
+                <div
+                  className="
+                    px-4
+                    pt-1
+                    pb-3
+                  "
+                >
                 {groupedChats.length === 0 ? (
                   <div className="px-2 py-8">
                     <div
@@ -841,148 +871,193 @@ export default function Sidebar({
 
             {/* =================================================
                 UPGRADE CARD
+                Separated from the chat history list with its own
+                divider + dismiss control so it never reads as if it
+                is covering/replacing the history above it.
             ================================================= */}
 
-            <div
-              className="
-                px-4
-                pb-3
-                shrink-0
-              "
-            >
+            {!upgradeDismissed && (
               <div
                 className="
-                  relative
-                  overflow-hidden
-                  rounded-[17px]
-                  p-4
+                  px-4
+                  pt-3
+                  pb-3
+                  shrink-0
 
-                  bg-gradient-to-br
-                  from-[#e6eeff]
-                  via-[#eef0ff]
-                  to-[#f2eaff]
-                  dark:from-[#181c3d]
-                  dark:via-[#1c1f45]
-                  dark:to-[#221a3f]
-
-                  border
-                  border-white/80
-                  dark:border-white/10
-
-                  shadow-[0_8px_24px_rgba(70,80,160,0.10)]
+                  border-t
+                  border-[#e1e5f2]
+                  dark:border-[#20233f]
                 "
               >
                 <div
                   className="
-                    absolute
-                    -right-7
-                    -top-7
-                    w-20
-                    h-20
-                    rounded-full
-                    bg-white/40
-                    dark:bg-white/5
-                  "
-                />
-
-                <div
-                  className="
                     relative
-                    flex
-                    items-start
-                    gap-3
+                    overflow-hidden
+                    rounded-[15px]
+                    p-3
+
+                    bg-gradient-to-br
+                    from-[#e6eeff]
+                    via-[#eef0ff]
+                    to-[#f2eaff]
+                    dark:from-[#181c3d]
+                    dark:via-[#1c1f45]
+                    dark:to-[#221a3f]
+
+                    border
+                    border-white/80
+                    dark:border-white/10
+
+                    shadow-[0_8px_24px_rgba(70,80,160,0.10)]
                   "
                 >
                   <div
                     className="
-                      w-9
-                      h-9
-                      rounded-xl
-
-                      bg-gradient-to-br
-                      from-[#536dff]
-                      to-[#7138f5]
-
-                      text-white
-
-                      flex
-                      items-center
-                      justify-center
-
-                      shrink-0
-
-                      shadow-md
+                      absolute
+                      -right-7
+                      -top-7
+                      w-20
+                      h-20
+                      rounded-full
+                      bg-white/40
+                      dark:bg-white/5
                     "
-                  >
-                    <Crown
-                      size={18}
-                      fill="currentColor"
-                    />
-                  </div>
-
-                  <div
-                    className="
-                      min-w-0
-                      flex-1
-                    "
-                  >
-                    <p
-                      className="
-                        text-[13px]
-                        font-bold
-                        text-[#24336d]
-                        dark:text-[#e7e9f7]
-                      "
-                    >
-                      Upgrade to Pro
-                    </p>
-
-                    <p
-                      className="
-                        text-[10px]
-                        leading-4
-                        text-[#6673a1]
-                        dark:text-[#9aa3c7]
-                        mt-1
-                      "
-                    >
-                      Get more limits, advanced
-                      models and premium features.
-                    </p>
-                  </div>
+                  />
 
                   <button
                     type="button"
-                    title="Billing is not available in this build"
-                    disabled
+                    onClick={dismissUpgradeCard}
+                    title="Dismiss"
+                    aria-label="Dismiss upgrade card"
                     className="
-                      w-8
-                      h-8
+                      absolute
+                      right-2
+                      top-2
+                      z-10
+                      w-5
+                      h-5
                       rounded-full
-
-                      bg-gradient-to-r
-                      from-[#4169ff]
-                      to-[#7138f5]
-
-                      text-white
 
                       flex
                       items-center
                       justify-center
 
-                      shrink-0
+                      text-[#8991ad]
+                      dark:text-[#8891c7]
 
-                      shadow-md
+                      hover:bg-white/70
+                      dark:hover:bg-white/10
+                      hover:text-[#3049c7]
+                      dark:hover:text-[#c7d2fe]
 
-                      opacity-50
-                      cursor-not-allowed
+                      transition
                     "
                   >
-                    <ArrowRight size={15} />
+                    <X size={12} strokeWidth={2.5} />
                   </button>
+
+                  <div
+                    className="
+                      relative
+                      flex
+                      items-start
+                      gap-3
+                      pr-4
+                    "
+                  >
+                    <div
+                      className="
+                        w-9
+                        h-9
+                        rounded-xl
+
+                        bg-gradient-to-br
+                        from-[#536dff]
+                        to-[#7138f5]
+
+                        text-white
+
+                        flex
+                        items-center
+                        justify-center
+
+                        shrink-0
+
+                        shadow-md
+                      "
+                    >
+                      <Crown
+                        size={18}
+                        fill="currentColor"
+                      />
+                    </div>
+
+                    <div
+                      className="
+                        min-w-0
+                        flex-1
+                      "
+                    >
+                      <p
+                        className="
+                          text-[13px]
+                          font-bold
+                          text-[#24336d]
+                          dark:text-[#e7e9f7]
+                        "
+                      >
+                        Upgrade to Pro
+                      </p>
+
+                      <p
+                        className="
+                          text-[10px]
+                          leading-4
+                          text-[#6673a1]
+                          dark:text-[#9aa3c7]
+                          mt-1
+                        "
+                      >
+                        Get more limits, advanced
+                        models and premium features.
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      title="Billing is not available in this build"
+                      disabled
+                      className="
+                        w-8
+                        h-8
+                        rounded-full
+
+                        bg-gradient-to-r
+                        from-[#4169ff]
+                        to-[#7138f5]
+
+                        text-white
+
+                        flex
+                        items-center
+                        justify-center
+
+                        shrink-0
+
+                        shadow-md
+
+                        opacity-50
+                        cursor-not-allowed
+                      "
+                    >
+                      <ArrowRight size={15} />
+                    </button>
+                  </div>
                 </div>
               </div>
+            )}
             </div>
+            {/* end scrollable region */}
 
             {/* =================================================
                 ACCOUNT

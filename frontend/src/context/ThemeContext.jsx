@@ -10,13 +10,12 @@ function getPreferredTheme() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === "light" || saved === "dark") return saved;
   } catch {
-    // localStorage unavailable — fall through to system preference
+    // localStorage unavailable — fall through to default
   }
 
-  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    return "dark";
-  }
-
+  // Always default to light mode on first visit, regardless of the
+  // device/browser's system color-scheme preference. The user can still
+  // switch to dark mode manually, and that choice will be remembered.
   return "light";
 }
 

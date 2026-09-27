@@ -98,31 +98,6 @@ export default function AuthPage() {
     }
   }
 
-  /* ================= GUEST LOGIN ================= */
-
-  async function continueAsGuest() {
-    if (loading) return;
-    setLoading(true);
-    setError("");
-
-    // A "guest" is a real backend account created transparently, so guest
-    // data (chats, projects, reminders) persists the same way as any other
-    // account for the lifetime of that browser's stored token.
-    const guestId = Math.random().toString(36).slice(2, 10);
-    const guestEmail = `guest-${guestId}@a2znexus.local`;
-    const guestPassword = `guest-${guestId}-${Date.now()}`;
-
-    try {
-      const response = await authApi.register("Guest", guestEmail, guestPassword);
-      setSession(response.access_token, response.user);
-      navigate("/chat", { replace: true });
-    } catch (err) {
-      setError(err.message || "Could not start a guest session. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   /* ================= GOOGLE ================= */
 
 
@@ -290,7 +265,7 @@ export default function AuthPage() {
             {/* AUTH CARD */}
             {/* ================================================= */}
 
-            <div className="rounded-[2rem] border border-white/80 bg-white/85 backdrop-blur-xl p-6 md:p-7 shadow-[0_25px_80px_rgba(15,23,42,0.12)] transition-all duration-500 hover:shadow-[0_30px_90px_rgba(15,23,42,0.16)]">
+            <div className="rounded-[2rem] border border-white/80 bg-white/85 backdrop-blur-xl p-5 md:p-6 shadow-[0_25px_80px_rgba(15,23,42,0.12)] transition-all duration-500 hover:shadow-[0_30px_90px_rgba(15,23,42,0.16)]">
 
               {/* ================================================= */}
               {/* LOGIN / REGISTER TABS */}
@@ -336,23 +311,13 @@ export default function AuthPage() {
               {/* TITLE */}
               {/* ================================================= */}
 
-              <div className="mb-5">
-
-                <div className="inline-flex items-center justify-center h-9 w-9 rounded-xl bg-blue-50 text-blue-600 mb-3">
-
-                  {mode === "login" ? (
-                    <LogIn size={18} />
-                  ) : (
-                    <UserPlus size={18} />
-                  )}
-
-                </div>
+              <div className="mb-4">
 
                 <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
                   {title}
                 </h1>
 
-                <p className="text-xs md:text-sm text-gray-500 mt-1.5 leading-5">
+                <p className="text-xs md:text-sm text-gray-500 mt-1 leading-5">
 
                   {mode === "login"
                     ? "Sign in to continue to your AI workspace."
@@ -368,7 +333,7 @@ export default function AuthPage() {
 
               <form
                 onSubmit={submit}
-                className="space-y-3.5"
+                className="space-y-3"
               >
 
                 {/* ================= NAME ================= */}
@@ -649,41 +614,6 @@ export default function AuthPage() {
                 </span>
 
               </button>
-
-              {/* ================================================= */}
-              {/* GUEST */}
-              {/* ================================================= */}
-
-              <button
-                type="button"
-                onClick={continueAsGuest}
-                disabled={loading}
-                className="group w-full mt-3 rounded-xl border border-gray-200 bg-white py-3 text-sm font-semibold text-gray-700 transition-all duration-300 hover:border-gray-300 hover:bg-gray-50 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-
-                <span className="flex items-center justify-center gap-2">
-
-                  Continue as Guest
-
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-
-                </span>
-
-              </button>
-
-              {/* ================================================= */}
-              {/* GUEST INFO */}
-              {/* ================================================= */}
-
-              <p className="text-[10px] text-gray-400 text-center mt-3 leading-4">
-
-                Guest mode lets you explore the A2Z Nexus
-                interface without creating an account.
-
-              </p>
 
             </div>
 
