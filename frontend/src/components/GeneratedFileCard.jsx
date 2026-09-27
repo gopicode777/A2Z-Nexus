@@ -72,7 +72,7 @@ export default function GeneratedFileCard({ file }) {
       <div className="flex items-center gap-3">
 
         {/* File Icon */}
-        <div className="w-11 h-11 rounded-lg bg-white border border-line flex items-center justify-center text-primary shrink-0">
+        <div className="w-11 h-11 rounded-lg bg-white dark:bg-[#181a33] border border-line flex items-center justify-center text-primary shrink-0">
           <Icon size={21} />
         </div>
 
@@ -97,7 +97,7 @@ export default function GeneratedFileCard({ file }) {
           <button
             type="button"
             onClick={handlePreview}
-            className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white text-muted hover:text-ink transition"
+            className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white dark:hover:bg-white/10 text-muted hover:text-ink transition"
             title="Open document"
           >
             <Eye size={17} />
@@ -106,7 +106,7 @@ export default function GeneratedFileCard({ file }) {
           <button
             type="button"
             onClick={handleDownload}
-            className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white text-primary transition"
+            className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-white dark:hover:bg-white/10 text-primary transition"
             title="Download document"
           >
             <Download size={17} />
@@ -119,7 +119,7 @@ export default function GeneratedFileCard({ file }) {
       <button
         type="button"
         onClick={handleDownload}
-        className="mt-3 w-full rounded-lg border border-line bg-white px-3 py-2 text-xs font-medium text-ink hover:bg-bgSoft transition"
+        className="mt-3 w-full rounded-lg border border-line bg-white dark:bg-[#181a33] px-3 py-2 text-xs font-medium text-ink hover:bg-bgSoft transition"
       >
         Download Document
       </button>

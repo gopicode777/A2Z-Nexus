@@ -1,16 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       colors: {
-        primary: "#2F6DF6",
-        secondary: "#55B7FF",
-        bgLight: "#F8FAFC",
-        bgSoft: "#f3f4f6",
-        ink: "#111827",
-        muted: "#6B7280",
-        line: "#E5E7EB",
+        primary: "rgb(var(--color-primary) / <alpha-value>)",
+        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+        bgLight: "rgb(var(--color-bg-light) / <alpha-value>)",
+        bgSoft: "rgb(var(--color-bg-soft) / <alpha-value>)",
+        ink: "rgb(var(--color-ink) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
+        line: "rgb(var(--color-line) / <alpha-value>)",
       },
       fontFamily: {
         display: ["'Fraunces'", "serif"],

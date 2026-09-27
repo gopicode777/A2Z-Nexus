@@ -3,6 +3,27 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Semantic design tokens (rgb channels, used as rgb(var(--x) / <alpha>) in Tailwind) */
+  --color-primary: 47 109 246;
+  --color-secondary: 85 183 255;
+  --color-bg-light: 248 250 252;
+  --color-bg-soft: 243 244 246;
+  --color-ink: 17 24 39;
+  --color-muted: 107 114 128;
+  --color-line: 229 231 235;
+}
+
+html.dark {
+  --color-primary: 108 133 255;
+  --color-secondary: 96 187 255;
+  --color-bg-light: 11 13 23;
+  --color-bg-soft: 20 22 44;
+  --color-ink: 231 233 247;
+  --color-muted: 154 163 199;
+  --color-line: 42 46 82;
+}
+
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 body {
@@ -11,15 +32,28 @@ body {
   color: #111827;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+html.dark body {
+  background: #0b0d17;
+  color: #e7e9f7;
 }
 
 ::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 
+html.dark ::-webkit-scrollbar-thumb { background: #33375c; }
+html.dark { scrollbar-color: #33375c transparent; }
+
 :focus-visible {
   outline: 2px solid #2f6df6;
   outline-offset: 2px;
+}
+
+html.dark :focus-visible {
+  outline-color: #818cf8;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -42,8 +76,41 @@ body {
   box-shadow: 0 0 0 3px rgba(47, 109, 246, 0.12);
 }
 
+html.dark .auth-input {
+  border-color: #2a2e52;
+  background: #14162c;
+  color: #e7e9f7;
+}
+html.dark .auth-input::placeholder {
+  color: #6b7099;
+}
+html.dark .auth-input:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.18);
+}
+
 button, input, textarea { font-family: inherit; }
 .prose-sm pre, pre { border: 1px solid #e5e7eb; }
+html.dark .prose-sm pre, html.dark pre { border-color: #2a2e52; }
+
+/* =========================================
+   Collapsed-sidebar hover tooltip
+   ========================================= */
+.sidebar-tooltip {
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-4px);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 70;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.group:hover .sidebar-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
 /* =========================================
    A2Z Nexus Logo Animation
    ========================================= */

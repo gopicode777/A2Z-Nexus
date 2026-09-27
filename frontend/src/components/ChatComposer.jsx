@@ -406,7 +406,7 @@ export default function ChatComposer({
               }
             />
 
-            <div className="absolute bottom-14 left-0 z-50 w-64 rounded-2xl border border-line bg-white shadow-xl overflow-hidden">
+            <div className="absolute bottom-14 left-0 z-50 w-64 rounded-2xl border border-line bg-white dark:bg-[#12142a] shadow-xl overflow-hidden">
 
               {/* MENU HEADER */}
 
@@ -435,7 +435,7 @@ export default function ChatComposer({
               >
 
                 <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <ImageIcon size={18} />
+                  <ImageIcon size={18} className="dark:opacity-90" />
                 </div>
 
                 <div>
@@ -464,7 +464,7 @@ export default function ChatComposer({
                 className="w-full flex items-center gap-3 px-4 py-3 hover:bg-bgSoft text-left transition"
               >
 
-                <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                   <FileText size={18} />
                 </div>
 
@@ -492,7 +492,7 @@ export default function ChatComposer({
                 className="w-full flex items-center gap-3 px-4 py-3 hover:bg-bgSoft text-left transition"
               >
 
-                <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
                   <Video size={18} />
                 </div>
 
@@ -520,7 +520,7 @@ export default function ChatComposer({
                 className="w-full flex items-center gap-3 px-4 py-3 hover:bg-bgSoft text-left transition"
               >
 
-                <div className="w-9 h-9 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 flex items-center justify-center shrink-0">
                   <FolderOpen size={18} />
                 </div>
 
@@ -558,7 +558,7 @@ export default function ChatComposer({
               )
             }
             disabled={disabled}
-            className="p-2 rounded-lg text-muted hover:text-ink hover:bg-white shrink-0 transition disabled:opacity-50"
+            className="p-2 rounded-lg text-muted hover:text-ink hover:bg-white dark:hover:bg-white/10 shrink-0 transition disabled:opacity-50"
             title="Attach file"
           >
             {menuOpen ? (
@@ -610,8 +610,8 @@ export default function ChatComposer({
             disabled={disabled}
             className={`p-2 rounded-lg shrink-0 transition ${
               listening
-                ? "text-red-500 bg-red-50"
-                : "text-muted hover:text-ink hover:bg-white"
+                ? "text-red-500 bg-red-50 dark:bg-red-500/10"
+                : "text-muted hover:text-ink hover:bg-white dark:hover:bg-white/10"
             } disabled:opacity-50`}
             title={
               listening

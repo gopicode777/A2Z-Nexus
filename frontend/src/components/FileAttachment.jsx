@@ -3,7 +3,7 @@ import { File, X } from "lucide-react";
 export default function FileAttachment({ file, onRemove }) {
   const sizeKb = (file.size / 1024).toFixed(0);
   return (
-    <div className="flex items-center gap-2 rounded-lg border border-line bg-white px-2.5 py-1.5">
+    <div className="flex items-center gap-2 rounded-lg border border-line bg-white dark:bg-[#181a33] px-2.5 py-1.5">
       <File size={15} className="text-primary shrink-0" />
       <div className="min-w-0">
         <p className="text-xs text-ink truncate max-w-[140px]">{file.name}</p>

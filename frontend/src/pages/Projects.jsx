@@ -176,7 +176,7 @@ export default function Projects() {
                     {p.technology || "—"}
                   </td>
                   <td className="px-4 py-3">
-                    <span className="inline-flex rounded-full border border-line bg-white px-2 py-0.5 text-xs font-medium capitalize">
+                    <span className="inline-flex rounded-full border border-line bg-white dark:bg-[#181a33] px-2 py-0.5 text-xs font-medium capitalize">
                       {p.status}
                     </span>
                   </td>

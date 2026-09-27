@@ -11,7 +11,7 @@ function StatCard({ value, label, tone }) {
       ? "border-red-200 text-red-700"
       : "border-line text-ink";
   return (
-    <div className={`rounded-xl border bg-white p-4 shadow-soft ${toneClasses}`}>
+    <div className={`rounded-xl border bg-white dark:bg-[#12142a] p-4 shadow-soft ${toneClasses}`}>
       <div className="text-2xl font-bold">{value}</div>
       <div className="text-xs text-muted mt-1">{label}</div>
     </div>
@@ -69,7 +69,7 @@ export default function Analytics() {
           </div>
 
           {data.agent_activity && Object.keys(data.agent_activity).length > 0 && (
-            <div className="rounded-xl border border-line bg-white p-4 shadow-soft">
+            <div className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
               <h2 className="text-sm font-semibold text-ink mb-3">Agent activity</h2>
               <table className="w-full text-sm">
                 <thead className="text-left text-xs font-semibold text-muted uppercase tracking-wide">

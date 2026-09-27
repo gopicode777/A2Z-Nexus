@@ -62,6 +62,7 @@ export default function ChatMessage({ message }) {
             rounded-2xl
             rounded-tl-md
             bg-[#ffffff]
+            dark:bg-[#161a38]
             border border-line
             px-4 py-3
             text-sm

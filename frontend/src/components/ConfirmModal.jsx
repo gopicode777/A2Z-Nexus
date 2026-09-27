@@ -2,7 +2,7 @@ export default function ConfirmModal({ open, title, description, confirmLabel = 
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 backdrop-blur-sm px-4">
-      <div className="w-full max-w-sm rounded-2xl bg-white border border-line shadow-premium p-5">
+      <div className="w-full max-w-sm rounded-2xl bg-white dark:bg-[#12142a] border border-line shadow-premium p-5">
         <h3 className="text-base font-semibold text-ink mb-1.5">{title}</h3>
         <p className="text-sm text-muted mb-5">{description}</p>
         <div className="flex justify-end gap-2">

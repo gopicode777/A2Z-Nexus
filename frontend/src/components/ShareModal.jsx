@@ -14,7 +14,7 @@ export default function ShareModal({ open, onClose, shareUrl = "https://a2znexus
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/30 backdrop-blur-sm px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white border border-line shadow-premium p-6">
+      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-[#12142a] border border-line shadow-premium p-6">
         <div className="flex items-start justify-between mb-1">
           <h3 className="text-base font-semibold text-ink">Share this conversation</h3>
           <button onClick={onClose} className="p-1 rounded-md hover:bg-bgSoft text-muted">

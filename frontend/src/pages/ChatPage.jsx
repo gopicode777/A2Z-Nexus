@@ -18,6 +18,7 @@ import ChatComposer from "../components/ChatComposer";
 import ShareModal from "../components/ShareModal";
 import LoadingState from "../components/LoadingState";
 import { getToken, clearSession, API_URL } from "../services/api";
+import { useTheme } from "../context/ThemeContext";
 
 const CHAT_LIMIT = 10;
 
@@ -564,6 +565,7 @@ function compressImage(file, maxSize = 1600) {
 
 export default function ChatPage() {
   const session = getSession();
+  const { isDark, toggleTheme } = useTheme();
 
   const [chats, setChats] = useState(() =>
     loadChats(session)
@@ -1409,7 +1411,7 @@ export default function ChatPage() {
   ==================================================== */
 
   return (
-    <div className="flex h-screen bg-[#f7f8ff] text-ink overflow-hidden">
+    <div className="flex h-screen bg-[#f7f8ff] dark:bg-[#0b0d17] text-ink overflow-hidden">
 
       {/* =================================================
           LEFT NAVIGATION
@@ -1437,7 +1439,7 @@ export default function ChatPage() {
           }
           title="Open sidebar"
           aria-label="Open sidebar"
-          className="fixed top-4 left-4 z-[70] w-10 h-10 rounded-xl bg-white/95 border border-[#e5e7eb] shadow-lg flex items-center justify-center text-ink hover:bg-[#f5f3ff] transition-all"
+          className="fixed top-4 left-4 z-[70] w-10 h-10 rounded-xl bg-white/95 dark:bg-[#181a33]/95 border border-[#e5e7eb] dark:border-[#2a2e52] shadow-lg flex items-center justify-center text-ink hover:bg-[#f5f3ff] dark:hover:bg-[#20233f] transition-all"
         >
           <Menu size={19} />
         </button>
@@ -1447,30 +1449,32 @@ export default function ChatPage() {
           MAIN WORKSPACE
       ================================================= */}
 
-      <main className="flex-1 min-w-0 h-full flex flex-col bg-white relative overflow-hidden">
+      <main className="flex-1 min-w-0 h-full flex flex-col bg-white dark:bg-[#0d0f1f] relative overflow-hidden">
 
         {/* =================================================
             TOP BAR
         ================================================= */}
 
-        <header className="h-[72px] shrink-0 border-b border-[#eef0f6] bg-white/90 backdrop-blur-xl flex items-center justify-end px-4 md:px-7 relative z-10">
+        <header className="h-[72px] shrink-0 border-b border-[#eef0f6] dark:border-[#20233f] bg-white/90 dark:bg-[#0d0f1f]/90 backdrop-blur-xl flex items-center justify-end px-4 md:px-7 relative z-10">
 
           <div className="flex items-center gap-2.5">
 
             <button
               type="button"
-              title="Theme"
-              className="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-[#64748b] hover:text-[#4f46e5] hover:bg-[#f5f3ff] transition"
+              title={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+              onClick={toggleTheme}
+              className="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-[#64748b] dark:text-[#9aa3c7] hover:text-[#4f46e5] dark:hover:text-[#a5b4fc] hover:bg-[#f5f3ff] dark:hover:bg-[#20233f] transition"
             >
               <span className="text-lg">
-                ☼
+                {isDark ? "☾" : "☼"}
               </span>
             </button>
 
             <button
               type="button"
               title="Notifications"
-              className="relative hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-[#64748b] hover:text-[#4f46e5] hover:bg-[#f5f3ff] transition"
+              className="relative hidden sm:flex w-10 h-10 rounded-xl items-center justify-center text-[#64748b] dark:text-[#9aa3c7] hover:text-[#4f46e5] dark:hover:text-[#a5b4fc] hover:bg-[#f5f3ff] dark:hover:bg-[#20233f] transition"
             >
               <span className="text-lg">
                 ♧
@@ -1481,7 +1485,7 @@ export default function ChatPage() {
               </span>
             </button>
 
-            <div className="h-8 w-px bg-[#edf0f5] hidden sm:block" />
+            <div className="h-8 w-px bg-[#edf0f5] dark:bg-[#20233f] hidden sm:block" />
 
             <div className="flex items-center gap-2.5 pl-1">
 
@@ -1492,17 +1496,17 @@ export default function ChatPage() {
               </div>
 
               <div className="hidden md:block leading-tight">
-                <p className="text-xs font-semibold text-[#172554]">
+                <p className="text-xs font-semibold text-[#172554] dark:text-[#e7e9f7]">
                   {session?.name ||
                     "Guest"}
                 </p>
 
-                <p className="text-[10px] text-[#64748b]">
+                <p className="text-[10px] text-[#64748b] dark:text-[#9aa3c7]">
                   AI Workspace
                 </p>
               </div>
 
-              <span className="text-xs text-[#64748b] hidden md:block">
+              <span className="text-xs text-[#64748b] dark:text-[#9aa3c7] hidden md:block">
                 ⌄
               </span>
 
@@ -1522,11 +1526,11 @@ export default function ChatPage() {
 
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-              <div className="absolute -top-32 -left-24 w-80 h-80 rounded-full bg-[#e9e7ff] blur-3xl opacity-70" />
+              <div className="absolute -top-32 -left-24 w-80 h-80 rounded-full bg-[#e9e7ff] dark:bg-[#221f45] blur-3xl opacity-70 dark:opacity-40" />
 
-              <div className="absolute -bottom-40 -left-20 w-96 h-96 rounded-full bg-[#eef2ff] blur-3xl opacity-80" />
+              <div className="absolute -bottom-40 -left-20 w-96 h-96 rounded-full bg-[#eef2ff] dark:bg-[#1a1f3f] blur-3xl opacity-80 dark:opacity-40" />
 
-              <div className="absolute -bottom-36 -right-24 w-96 h-96 rounded-full bg-[#f3e8ff] blur-3xl opacity-70" />
+              <div className="absolute -bottom-36 -right-24 w-96 h-96 rounded-full bg-[#f3e8ff] dark:bg-[#231a3f] blur-3xl opacity-70 dark:opacity-40" />
 
             </div>
 
@@ -1569,7 +1573,7 @@ export default function ChatPage() {
                           HEADING
                       ========================================= */}
 
-                      <h1 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[#111b4d]">
+                      <h1 className="text-3xl md:text-4xl font-bold tracking-[-0.03em] text-[#111b4d] dark:text-[#e7e9f7]">
 
                         How can I{" "}
 
@@ -1587,7 +1591,7 @@ export default function ChatPage() {
                           DESCRIPTION
                       ========================================= */}
 
-                      <p className="text-sm md:text-base text-[#64748b] mt-4 max-w-2xl leading-7">
+                      <p className="text-sm md:text-base text-[#64748b] dark:text-[#9aa3c7] mt-4 max-w-2xl leading-7">
 
                         Ask anything, get instant answers, solve problems, and bring your ideas to life with A2Z Nexus.
 
@@ -1649,14 +1653,14 @@ export default function ChatPage() {
                                   hint
                                 )
                               }
-                              className="group flex items-center gap-2.5 rounded-full border border-[#e5e7eb] bg-white/90 px-4 py-2.5 text-xs md:text-sm font-medium text-[#334155] shadow-[0_5px_18px_rgba(79,70,229,0.06)] hover:-translate-y-0.5 hover:border-[#c4b5fd] hover:bg-[#faf9ff] hover:text-[#4f46e5] transition-all"
+                              className="group flex items-center gap-2.5 rounded-full border border-[#e5e7eb] dark:border-[#2a2e52] bg-white/90 dark:bg-[#141731]/90 px-4 py-2.5 text-xs md:text-sm font-medium text-[#334155] dark:text-[#c7cbe8] shadow-[0_5px_18px_rgba(79,70,229,0.06)] hover:-translate-y-0.5 hover:border-[#c4b5fd] dark:hover:border-[#4f46e5] hover:bg-[#faf9ff] dark:hover:bg-[#191c3d] hover:text-[#4f46e5] dark:hover:text-[#a5b4fc] transition-all"
                             >
 
-                              <span className="w-7 h-7 rounded-full bg-[#f5f3ff] flex items-center justify-center group-hover:bg-[#ede9fe] transition">
+                              <span className="w-7 h-7 rounded-full bg-[#f5f3ff] dark:bg-[#20233f] flex items-center justify-center group-hover:bg-[#ede9fe] dark:group-hover:bg-[#282c54] transition">
 
                                 <Icon
                                   size={15}
-                                  className="text-[#4f46e5]"
+                                  className="text-[#4f46e5] dark:text-[#a5b4fc]"
                                 />
 
                               </span>
@@ -1706,11 +1710,11 @@ export default function ChatPage() {
                 COMPOSER
             ================================================= */}
 
-            <div className="shrink-0 px-4 md:px-10 pb-5 pt-2 bg-gradient-to-t from-white via-white/95 to-transparent relative z-[2]">
+            <div className="shrink-0 px-4 md:px-10 pb-5 pt-2 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-[#0d0f1f] dark:via-[#0d0f1f]/95 dark:to-transparent relative z-[2]">
 
               <div className="max-w-6xl mx-auto">
 
-                <div className="rounded-[24px] bg-white border border-[#e5e7eb] shadow-[0_10px_35px_rgba(79,70,229,0.10)] p-1.5">
+                <div className="rounded-[24px] bg-white dark:bg-[#12142a] border border-[#e5e7eb] dark:border-[#242850] shadow-[0_10px_35px_rgba(79,70,229,0.10)] p-1.5">
 
                   <ChatComposer
                     onSend={handleSend}

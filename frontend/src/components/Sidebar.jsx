@@ -251,11 +251,15 @@ export default function Sidebar({
 
           border-r
           border-[#e5e8f3]
+          dark:border-[#20233f]
 
           bg-gradient-to-b
           from-[#f9faff]
           via-[#f5f7ff]
           to-[#eef2ff]
+          dark:from-[#0f1123]
+          dark:via-[#12142a]
+          dark:to-[#14162c]
 
           transition-all
           duration-300
@@ -287,6 +291,7 @@ export default function Sidebar({
             shrink-0
             border-b
             border-[#e5e8f3]
+            dark:border-[#20233f]
             transition-all
             duration-300
 
@@ -375,6 +380,7 @@ export default function Sidebar({
                     font-bold
                     tracking-[-0.5px]
                     text-[#172554]
+                    dark:text-[#e7e9f7]
                   "
                 >
                   A2Z
@@ -386,6 +392,7 @@ export default function Sidebar({
                     text-[24px]
                     font-medium
                     text-[#4f46e5]
+                    dark:text-[#a5b4fc]
                   "
                 >
                   Nexus
@@ -429,13 +436,16 @@ export default function Sidebar({
               rounded-l-[10px]
 
               bg-white/95
+              dark:bg-[#181a33]/95
               backdrop-blur-md
 
               border
               border-l-0
               border-[#dfe4f2]
+              dark:border-[#2a2e52]
 
               text-[#6874a8]
+              dark:text-[#9aa3c7]
 
               shadow-[4px_6px_18px_rgba(79,70,229,0.12)]
 
@@ -444,8 +454,11 @@ export default function Sidebar({
               ease-out
 
               hover:bg-[#f8f9ff]
+              dark:hover:bg-[#20233f]
               hover:text-[#4f46e5]
+              dark:hover:text-[#a5b4fc]
               hover:border-[#c9cff5]
+              dark:hover:border-[#3a3f6e]
               hover:shadow-[5px_8px_22px_rgba(79,70,229,0.20)]
               hover:w-[34px]
 
@@ -605,8 +618,8 @@ export default function Sidebar({
                       transition
                       ${
                         active
-                          ? "bg-[#e8ecff] text-[#3049c7] font-semibold"
-                          : "text-[#172554] hover:bg-white/70 font-medium"
+                          ? "bg-[#e8ecff] text-[#3049c7] font-semibold dark:bg-[#232752] dark:text-[#c7d2fe]"
+                          : "text-[#172554] hover:bg-white/70 font-medium dark:text-[#c7cbe8] dark:hover:bg-white/5"
                       }
                     `}
                   >
@@ -618,7 +631,7 @@ export default function Sidebar({
                     </span>
                     <span className="text-[14px]">{label}</span>
                     {key === "notifications" && unreadCount > 0 && (
-                      <span className="ml-auto text-[11px] font-semibold text-[#3049c7] bg-white/70 rounded-full px-2 py-0.5">
+                      <span className="ml-auto text-[11px] font-semibold text-[#3049c7] bg-white/70 rounded-full px-2 py-0.5 dark:text-[#c7d2fe] dark:bg-white/10">
                         {unreadCount}
                       </span>
                     )}
@@ -637,6 +650,7 @@ export default function Sidebar({
                 my-3
                 border-t
                 border-[#e1e5f2]
+                dark:border-[#20233f]
                 shrink-0
               "
             />
@@ -661,6 +675,7 @@ export default function Sidebar({
                   py-2
                   text-left
                   text-[#172554]
+                  dark:text-[#c7cbe8]
                 "
               >
                 <span
@@ -721,6 +736,7 @@ export default function Sidebar({
                         h-10
                         rounded-xl
                         bg-white
+                        dark:bg-[#181a33]
                         shadow-sm
                         flex
                         items-center
@@ -732,6 +748,7 @@ export default function Sidebar({
                         size={18}
                         className="
                           text-[#6874a8]
+                          dark:text-[#8891c7]
                         "
                       />
                     </div>
@@ -741,6 +758,7 @@ export default function Sidebar({
                         text-[13px]
                         font-semibold
                         text-[#18214d]
+                        dark:text-[#e7e9f7]
                       "
                     >
                       No conversations yet
@@ -750,6 +768,7 @@ export default function Sidebar({
                       className="
                         text-[11px]
                         text-[#7b84a5]
+                        dark:text-[#8891c7]
                         mt-1
                         leading-5
                       "
@@ -777,6 +796,7 @@ export default function Sidebar({
                                 text-[11px]
                                 font-medium
                                 text-[#8991ad]
+                                dark:text-[#6b7099]
                               "
                             >
                               {label}
@@ -786,6 +806,7 @@ export default function Sidebar({
                               size={13}
                               className="
                                 text-[#a0a7bd]
+                                dark:text-[#4f5480]
                               "
                             />
                           </div>
@@ -840,9 +861,13 @@ export default function Sidebar({
                   from-[#e6eeff]
                   via-[#eef0ff]
                   to-[#f2eaff]
+                  dark:from-[#181c3d]
+                  dark:via-[#1c1f45]
+                  dark:to-[#221a3f]
 
                   border
                   border-white/80
+                  dark:border-white/10
 
                   shadow-[0_8px_24px_rgba(70,80,160,0.10)]
                 "
@@ -856,6 +881,7 @@ export default function Sidebar({
                     h-20
                     rounded-full
                     bg-white/40
+                    dark:bg-white/5
                   "
                 />
 
@@ -905,6 +931,7 @@ export default function Sidebar({
                         text-[13px]
                         font-bold
                         text-[#24336d]
+                        dark:text-[#e7e9f7]
                       "
                     >
                       Upgrade to Pro
@@ -915,6 +942,7 @@ export default function Sidebar({
                         text-[10px]
                         leading-4
                         text-[#6673a1]
+                        dark:text-[#9aa3c7]
                         mt-1
                       "
                     >
@@ -974,10 +1002,10 @@ export default function Sidebar({
                     {(user.name || user.email || "?").charAt(0).toUpperCase()}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-semibold text-[#172554] truncate">
+                    <p className="text-[13px] font-semibold text-[#172554] dark:text-[#e7e9f7] truncate">
                       {user.name || "Account"}
                     </p>
-                    <p className="text-[11px] text-[#6673a1] truncate">{user.email}</p>
+                    <p className="text-[11px] text-[#6673a1] dark:text-[#9aa3c7] truncate">{user.email}</p>
                   </div>
                 </div>
               )}
@@ -1000,8 +1028,8 @@ export default function Sidebar({
                   transition
                   ${
                     isActive("/settings")
-                      ? "bg-[#e8ecff] text-[#3049c7] font-semibold"
-                      : "text-[#172554] hover:bg-white/70 font-medium"
+                      ? "bg-[#e8ecff] text-[#3049c7] font-semibold dark:bg-[#232752] dark:text-[#c7d2fe]"
+                      : "text-[#172554] hover:bg-white/70 font-medium dark:text-[#c7cbe8] dark:hover:bg-white/5"
                   }
                 `}
               >
@@ -1024,8 +1052,10 @@ export default function Sidebar({
 
                   text-left
                   text-[#b91c1c]
+                  dark:text-[#f87171]
 
                   hover:bg-red-50
+                  dark:hover:bg-red-500/10
 
                   transition
                 "
@@ -1059,6 +1089,8 @@ export default function Sidebar({
               onClick={handleNewChat}
               title="New Chat"
               className="
+                group
+                relative
                 w-11
                 h-11
                 rounded-[14px]
@@ -1081,6 +1113,9 @@ export default function Sidebar({
               "
             >
               <Plus size={19} />
+              <span className="sidebar-tooltip bg-[#111827] text-white dark:bg-[#f4f4fa] dark:text-[#111827] text-[11px] font-medium px-2.5 py-1 rounded-md shadow-lg">
+                New Chat
+              </span>
             </button>
 
             <div
@@ -1088,6 +1123,7 @@ export default function Sidebar({
                 w-8
                 border-t
                 border-[#e0e4f0]
+                dark:border-[#20233f]
                 my-1
               "
             />
@@ -1103,6 +1139,7 @@ export default function Sidebar({
                   title={label}
                   onClick={() => goTo(to)}
                   className={`
+                    group
                     relative
                     w-11
                     h-11
@@ -1113,8 +1150,8 @@ export default function Sidebar({
                     transition
                     ${
                       active
-                        ? "bg-[#e8ecff] text-[#3049c7]"
-                        : "text-[#64709a] hover:bg-white hover:text-[#3049c7]"
+                        ? "bg-[#e8ecff] text-[#3049c7] dark:bg-[#232752] dark:text-[#c7d2fe]"
+                        : "text-[#64709a] hover:bg-white hover:text-[#3049c7] dark:text-[#8891c7] dark:hover:bg-white/5 dark:hover:text-[#c7d2fe]"
                     }
                   `}
                 >
@@ -1122,6 +1159,9 @@ export default function Sidebar({
                   {key === "notifications" && unreadCount > 0 && (
                     <span className="absolute right-[9px] top-[8px] w-[6px] h-[6px] rounded-full bg-red-500" />
                   )}
+                  <span className="sidebar-tooltip bg-[#111827] text-white dark:bg-[#f4f4fa] dark:text-[#111827] text-[11px] font-medium px-2.5 py-1 rounded-md shadow-lg">
+                    {label}
+                  </span>
                 </button>
               );
             })}
@@ -1135,6 +1175,8 @@ export default function Sidebar({
               title="Settings"
               onClick={() => goTo("/settings")}
               className={`
+                group
+                relative
                 w-11
                 h-11
                 rounded-[13px]
@@ -1149,12 +1191,15 @@ export default function Sidebar({
 
                 ${
                   isActive("/settings")
-                    ? "bg-[#e8ecff] text-[#3049c7]"
-                    : "text-[#64709a] hover:bg-white hover:text-[#3049c7]"
+                    ? "bg-[#e8ecff] text-[#3049c7] dark:bg-[#232752] dark:text-[#c7d2fe]"
+                    : "text-[#64709a] hover:bg-white hover:text-[#3049c7] dark:text-[#8891c7] dark:hover:bg-white/5 dark:hover:text-[#c7d2fe]"
                 }
               `}
             >
               <Settings size={19} />
+              <span className="sidebar-tooltip bg-[#111827] text-white dark:bg-[#f4f4fa] dark:text-[#111827] text-[11px] font-medium px-2.5 py-1 rounded-md shadow-lg">
+                Settings
+              </span>
             </button>
 
             {/* LOGOUT */}
@@ -1164,6 +1209,8 @@ export default function Sidebar({
               title="Log out"
               onClick={handleLogout}
               className="
+                group
+                relative
                 w-11
                 h-11
                 rounded-[13px]
@@ -1173,9 +1220,12 @@ export default function Sidebar({
                 justify-center
 
                 text-[#64709a]
+                dark:text-[#8891c7]
 
                 hover:bg-white
                 hover:text-red-600
+                dark:hover:bg-white/5
+                dark:hover:text-red-400
 
                 transition
 
@@ -1183,6 +1233,9 @@ export default function Sidebar({
               "
             >
               <LogOut size={19} />
+              <span className="sidebar-tooltip bg-[#111827] text-white dark:bg-[#f4f4fa] dark:text-[#111827] text-[11px] font-medium px-2.5 py-1 rounded-md shadow-lg">
+                Log out
+              </span>
             </button>
           </div>
         )}

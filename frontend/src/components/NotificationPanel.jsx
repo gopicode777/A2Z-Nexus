@@ -72,7 +72,7 @@ export default function NotificationPanel() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-11 w-80 rounded-2xl bg-white border border-line shadow-premium overflow-hidden z-30">
+        <div className="absolute right-0 top-11 w-80 rounded-2xl bg-white dark:bg-[#12142a] border border-line shadow-premium overflow-hidden z-30">
           <div className="px-4 py-3 border-b border-line flex items-center justify-between">
             <p className="text-sm font-semibold text-ink">Notifications</p>
             {unreadCount > 0 && <span className="text-xs text-muted">{unreadCount} unread</span>}

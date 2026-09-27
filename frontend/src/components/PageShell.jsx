@@ -14,7 +14,7 @@ export default function PageShell({ title, subtitle, actions, children }) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-screen bg-[#f7f8ff] text-ink overflow-hidden">
+    <div className="flex h-screen bg-[#f7f8ff] dark:bg-[#0b0d17] text-ink overflow-hidden">
       <Sidebar
         open={true}
         chats={[]}
@@ -23,8 +23,8 @@ export default function PageShell({ title, subtitle, actions, children }) {
         onCloseMobile={() => setMobileOpen(false)}
       />
 
-      <main className="flex-1 min-w-0 h-full flex flex-col bg-white relative overflow-hidden">
-        <header className="shrink-0 flex items-center justify-between gap-3 px-4 md:px-8 h-16 border-b border-line bg-white/90 backdrop-blur">
+      <main className="flex-1 min-w-0 h-full flex flex-col bg-white dark:bg-[#0d0f1f] relative overflow-hidden">
+        <header className="shrink-0 flex items-center justify-between gap-3 px-4 md:px-8 h-16 border-b border-line bg-white/90 dark:bg-[#0d0f1f]/90 backdrop-blur">
           <div className="flex items-center gap-3 min-w-0">
             <button
               type="button"

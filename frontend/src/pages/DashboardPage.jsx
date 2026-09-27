@@ -29,7 +29,7 @@ export default function DashboardPage() {
           <button
             key={title}
             onClick={() => navigate(to)}
-            className="text-left rounded-2xl border border-line bg-white p-5 hover:shadow-premium hover:-translate-y-0.5 transition-all"
+            className="text-left rounded-2xl border border-line bg-white dark:bg-[#12142a] p-5 hover:shadow-premium hover:-translate-y-0.5 transition-all"
           >
             <div className="w-10 h-10 rounded-xl bg-bgSoft flex items-center justify-center text-primary mb-3">
               <Icon size={19} />

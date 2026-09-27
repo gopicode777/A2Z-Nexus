@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { CheckCircle2, XCircle, Loader2, LogOut } from "lucide-react";
+import { CheckCircle2, XCircle, Loader2, LogOut, Sun, Moon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import PageShell from "../components/PageShell";
 import { API_URL, authApi, clearSession, getStoredUser } from "../services/api";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Settings() {
   const navigate = useNavigate();
   const user = getStoredUser();
+  const { isDark, toggleTheme } = useTheme();
 
   const [health, setHealth] = useState({ status: "checking" }); // checking | ok | down
   const [profile, setProfile] = useState(user);
@@ -32,7 +34,7 @@ export default function Settings() {
   return (
     <PageShell title="Settings">
       <div className="space-y-4">
-        <section className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <section className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Account</h2>
           {profile ? (
             <dl className="text-sm space-y-2">
@@ -62,7 +64,30 @@ export default function Settings() {
           </button>
         </section>
 
-        <section className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <section className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
+          <h2 className="text-sm font-semibold text-ink mb-3">Appearance</h2>
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-sm text-ink font-medium">Theme</p>
+              <p className="text-xs text-muted mt-0.5">
+                {isDark ? "Dark mode is on." : "Light mode is on."} This only affects how A2Z Nexus looks.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              role="switch"
+              aria-checked={isDark}
+              aria-label="Toggle dark mode"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-bgSoft px-3 py-2 text-sm font-medium text-ink hover:bg-line/60 transition-colors shrink-0"
+            >
+              {isDark ? <Moon size={15} /> : <Sun size={15} />}
+              {isDark ? "Dark" : "Light"}
+            </button>
+          </div>
+        </section>
+
+        <section className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Backend connection</h2>
           <div className="flex items-center gap-2 text-sm">
             {health.status === "checking" && (
@@ -88,7 +113,7 @@ export default function Settings() {
           </div>
         </section>
 
-        <section className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <section className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">AI provider</h2>
           <p className="text-sm text-muted">
             The active AI provider is configured on the backend via the{" "}
@@ -101,7 +126,7 @@ export default function Settings() {
           </p>
         </section>
 
-        <section className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <section className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Calendar reminders</h2>
           <p className="text-sm text-muted">
             Reminders are stored and managed in the database. Syncing them to Google Calendar

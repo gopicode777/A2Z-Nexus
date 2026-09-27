@@ -96,6 +96,7 @@ export default function LoadingState({
           rounded-2xl
           rounded-tl-md
           bg-[#ffffff]
+          dark:bg-[#161a38]
           border border-line
           px-4 py-3
           shadow-sm

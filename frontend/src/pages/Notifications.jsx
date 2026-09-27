@@ -71,7 +71,7 @@ export default function Notifications() {
               onClick={() => !n.read && markRead(n.id)}
               className={`w-full text-left rounded-xl border p-4 transition ${
                 n.read
-                  ? "border-line bg-white opacity-70"
+                  ? "border-line bg-white dark:bg-[#12142a] opacity-70"
                   : "border-primary/30 bg-blue-50/40 hover:bg-blue-50 cursor-pointer"
               }`}
             >

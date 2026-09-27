@@ -116,7 +116,7 @@ export default function ProjectDetail() {
       )}
 
       <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <div className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Project info</h2>
           <dl className="text-sm space-y-2">
             <Row label="Description" value={project.description || "—"} />
@@ -129,7 +129,7 @@ export default function ProjectDetail() {
           </dl>
         </div>
 
-        <div className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <div className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Agent actions</h2>
           <div className="flex flex-col gap-2">
             {ACTIONS.map((action) => {
@@ -157,7 +157,7 @@ export default function ProjectDetail() {
       </div>
 
       {actionResult && (
-        <div className="rounded-xl border border-line bg-white p-4 shadow-soft">
+        <div className="rounded-xl border border-line bg-white dark:bg-[#12142a] p-4 shadow-soft">
           <h2 className="text-sm font-semibold text-ink mb-3">Result</h2>
           <pre className="text-xs whitespace-pre-wrap break-words text-ink max-h-96 overflow-auto bg-bgSoft rounded-lg p-3">
             {resultText(actionResult)}
